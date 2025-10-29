@@ -1,0 +1,479 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Main App Layout */
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+/* Error Message */
+.error-message {
+  background: #e74c3c;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Filters */
+.filters {
+  background: white;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.feed-types-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.feed-type-btn {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  background: white;
+  text-align: left;
+}
+
+.feed-type-btn.active {
+  border-color: #3498db;
+  background: #ebf5fb;
+}
+
+.magnitude-presets {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.preset-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid #3498db;
+  background: white;
+  color: #3498db;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.preset-btn.active {
+  background: #3498db;
+  color: white;
+}
+
+/* Main Content */
+.app-content {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 200px);
+}
+
+/* Map Container - CRITICAL */
+.map-container {
+  flex: 2;
+  position: relative;
+  background: #a4d0f0;
+}
+
+/* Leaflet Container - ABSOLUTELY CRITICAL */
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+/* List Container */
+.list-container {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+/* Earthquake List */
+.earthquake-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-header {
+  background: #34495e;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.list-items {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.earthquake-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  gap: 1rem;
+}
+
+.magnitude-indicator {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.earthquake-details h4 {
+  margin-bottom: 0.25rem;
+}
+
+/* Loading */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Footer */
+.app-footer {
+  background: #34495e;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-content {
+    flex-direction: column;
+  }
+  
+  .list-container {
+    max-height: 300px;
+    min-width: auto;
+  }
+  /* Date input errors */
+.input-group {
+  position: relative;
+}
+
+.input-group input.error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.1);
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.date-error-summary {
+  background: #ffeaa7;
+  color: #e17055;
+  padding: 0.8rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1rem;
+  border: 1px solid #fdcb6e;
+}
+
+/* Loading state for submit button */
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Fix scroll for earthquake list */
+.list-section {
+  flex: 1;
+  min-width: 350px;
+  background: white;
+  border-left: 1px solid #e0e0e0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #fafafa;
+  height: 100%;
+}
+
+/* Ensure scroll works */
+.list-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.list-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.list-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Selected earthquake item */
+.earthquake-item.selected {
+  background: linear-gradient(135deg, #ebf5fb, #e1f0fa);
+  border-left: 4px solid #3498db;
+  transform: translateX(2px);
+}
+
+.earthquake-item.selected .magnitude-indicator {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Popup styles */
+.earthquake-popup {
+  min-width: 280px;
+  padding: 10px;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.magnitude-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-details {
+  margin-bottom: 15px;
+}
+
+.popup-details p {
+  margin: 8px 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.popup-details strong {
+  color: #2c3e50;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.usgs-link-btn {
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.usgs-link-btn:hover {
+  background: #2980b9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .list-section {
+    max-height: 400px;
+    min-width: auto;
+  }
+  
+  .earthquake-popup {
+    min-width: 250px;
+  }
+}
+/* Map Container Styles */
+.map-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+  background: #a4d0f0;
+}
+
+/* Ensure the main content area has proper height */
+.main-content {
+  flex: 1;
+  display: flex;
+  height: calc(100vh - 200px);
+  min-height: 400px;
+}
+
+.map-section {
+  flex: 2;
+  position: relative;
+  background: #a4d0f0;
+}
+
+/* Map Legend Styles */
+.map-legend {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 20px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  padding: 15px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  z-index: 1000 !important;
+  max-width: 220px !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.map-legend h4 {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  color: #2c3e50;
+  text-align: center;
+  font-weight: 700;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.legend-item span {
+  font-size: 0.8rem;
+  color: #555;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Ensure the map container has proper positioning */
+.map-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+  background: #a4d0f0;
+}
+}
